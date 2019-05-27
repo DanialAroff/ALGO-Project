@@ -23,8 +23,7 @@ stopwords = ['a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'a
              'your', 'yours', 'yourself', 'yourselves']
 
 
-url = "https://www.dhakatribune.com/bangladesh/dhaka/2019/05/25/dncc-mayor-footpaths-must-be-kept-clear-to-" \
-      "reduce-tailbacks"
+url = 'https://japantoday.com/category/business/McDonald\'s-Japan-ordered-to-pay-¥21-mil-over-improper-labeling'
 # untuk download artikel daripada internet
 article = Article(url, keep_article_html=True, language='en')
 article.download()
@@ -53,6 +52,22 @@ list_of_words = text.split()
 word = ''
 list_of_words = [re.sub(r'\W+', '', word) for word in list_of_words]
 
+length_list = len(list_of_words)
+empty_element = 0
+for word in list_of_words:
+    if word is '':
+        empty_element = empty_element + 1
+print('\n\nEmpty element count: ' + str(empty_element))
+
+# to strip empty elements from the list
+for i in range(len(list_of_words)):
+    if i == length_list - empty_element - 1:
+        break
+    if list_of_words[i] is '':
+        del list_of_words[i]
+        i = i - 1
+
 print(list_of_words)
+print('Word count: ' + str(len(list_of_words)))
 
 
