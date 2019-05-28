@@ -2,7 +2,7 @@ from geopy import distance
 from geopy.geocoders import Nominatim
 
 
-class MyDistanceCalculator:
+class ADistance:
     def __init__(self):
         self.timeout = 20
         self.geolocator = Nominatim(user_agent='WIA2005_Project')
