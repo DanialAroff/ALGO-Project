@@ -6,6 +6,9 @@ p = positive.read().split(',')
 for i in range(len(p)):
     if p[i][0] == ' ':
         p[i] = p[i][1:]
+for i in range(len(p)):
+    p[i] = p[i].lower()
+
 positive2 = open('wordlist/positivewords.txt', 'w', encoding='utf-8')
 [positive2.write(word + '\n') for word in p]
 

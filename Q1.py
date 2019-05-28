@@ -1,5 +1,7 @@
 from gmplot import *
 from number2 import ADistance
+import webbrowser
+import os
 
 # coordinate for KL -- 3.1516636, 101.6943028
 
@@ -23,12 +25,17 @@ coord = []
 for j in range(len(locations)):
     coord.append(d.get_coord(locations[j]))
 lats, lons = zip(*coord)
+
 # declare center of the map
 gmap2 = gmplot.GoogleMapPlotter(3.1516636, 101.6943028, 13)
+
 # Scatter map
-gmap2.scatter(lats, lons, '#FF0000', size=50, marker=False)
+gmap2.scatter(lats, lons, '#FF0000', size=500, marker=False)
+
 # Plot method Draw a line in between given coordinates
 gmap2.plot(lats, lons, 'cornflowerblue', edge_width=2.0)
 gmap2.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
-gmap2.draw("maps/scatter.html")
+gmap2.draw("maps/scatter map.html")
 
+url = r"maps\scatter map.html"
+webbrowser.open(url, new=2)

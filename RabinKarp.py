@@ -5,6 +5,8 @@ d = 256
 def search(pat, txt, q):
     M = len(pat)
     N = len(txt)
+    pat = pat.lower()  # pat is lowercased because we want to ignore case
+    txt =txt.lower()  # txt is lowercased
     p = 0  # hash value for pattern
     t = 0  # hash value for txt
     h = pow(d, M-1)
@@ -34,8 +36,8 @@ def rabin_karp_matcher(pattern, text):
 
 
 txt = "GEEKS FOR GEEKS"
-pat = "GEEK"
+pat = "geeks for geeks"
 q = 101  # A prime number
-print(search(pat, txt, q))
+print(rabin_karp_matcher(pat, txt))
 
 # This code is contributed by Bhavya Jain
