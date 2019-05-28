@@ -1,11 +1,11 @@
 import time
 from geopy.geocoders import Nominatim
-from number2 import MyDistanceCalculator
+from number2 import ADistance
 
 print(time.strftime('%Y/%m/%d %I:%M:%S  %A\n'))
 geolocator = Nominatim(user_agent='WIA2005_Assignment')
 
-d = MyDistanceCalculator()
+d = ADistance()
 locations = ['Moscow', 'Dhaka', 'Manila', 'New York City', 'Shanghai', 'Kuala Lumpur', 'Tokyo']
 
 for current in range(len(locations)):
