@@ -46,28 +46,28 @@ for script in soup(["script", "style"]):
 text = soup.get_text()
 
 # splitting text into list of words
-list_of_words = text.split()
+wordslist = text.split()
 
 # remove non-alphanumeric characters like ! and &
 word = ''
-list_of_words = [re.sub(r'\W+', '', word) for word in list_of_words]
+wordslist = [re.sub(r'\W+', '', word) for word in wordslist]
 
-length_list = len(list_of_words)
+# count empty elements in the list
 empty_element = 0
-for word in list_of_words:
+for word in wordslist:
     if word is '':
         empty_element = empty_element + 1
-print('\n\nEmpty element count: ' + str(empty_element))
 
-# to strip empty elements from the list
-for i in range(len(list_of_words)):
-    if i == length_list - empty_element - 1:
+# to remove empty elements from the list
+init_length = len(wordslist)  # initial length of the list
+for i in range(len(wordslist)):
+    if i == init_length - empty_element - 1:
         break
-    if list_of_words[i] is '':
-        del list_of_words[i]
+    if wordslist[i] is '':
+        del wordslist[i]
         i = i - 1
 
-print(list_of_words)
-print('Word count: ' + str(len(list_of_words)))
+print(wordslist)
+print('Word count: ' + str(len(wordslist)))
 
 
