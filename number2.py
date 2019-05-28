@@ -17,7 +17,7 @@ class ADistance:
         return round(distance.distance(location1_coord, location2_coord).km, 3)
 
     def get_coord(self, location):
-        location = self.geolocator.geocode(location, language='en')
+        location = self.geolocator.geocode(location, timeout=30, language='en')
         return location.latitude, location.longitude
 
     def get_addr(self, location):
