@@ -24,6 +24,7 @@ stopwords = ['a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'a
 
 
 url = 'https://japantoday.com/category/business/McDonald\'s-Japan-ordered-to-pay-¥21-mil-over-improper-labeling'
+
 # untuk download artikel daripada internet
 article = Article(url, keep_article_html=True, language='en')
 article.download()
