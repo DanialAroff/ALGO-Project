@@ -11,6 +11,17 @@ class News:
         self.article.parse()
         self.article.nlp()
 
+    def get_text(self):
+        """
+        get all the text in the article from the html
+        :return: text
+        """
+        soup = BeautifulSoup(self.article.html, features="lxml")
+        for script in soup(["script", "style"]):
+            script.extract()
+
+        return soup.get_text
+
     def get_list(self):
         """
         get the list of words inside the article
@@ -24,13 +35,28 @@ class News:
         text = soup.get_text()
 
         # splitting text into list of words
-        list_of_words = text.split()
+        wordslist = text.split()
 
         # remove non-alphanumeric characters like ! and &
         word = ''
-        list_of_words = [re.sub(r'\W+', '', word) for word in list_of_words]
+        wordslist = [re.sub(r'\W+', '', word) for word in wordslist]
 
-        return list_of_words
+        # count empty elements in the list
+        empty_element = 0
+        for word in wordslist:
+            if word is '':
+                empty_element = empty_element + 1
+
+        # to remove empty elements from the list
+        init_length = len(wordslist)  # initial length of the list
+        for i in range(len(wordslist)):
+            if i == init_length - empty_element - 1:
+                break
+            if wordslist[i] is '':
+                del wordslist[i]
+                i = i - 1
+
+        return wordslist
 
     def title(self):
         return self.article.title
