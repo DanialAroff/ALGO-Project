@@ -20,7 +20,9 @@ class News:
         for script in soup(["script", "style"]):
             script.extract()
 
-        return soup.get_text
+        text = soup.text
+
+        return text
 
     def get_list(self):
         """
