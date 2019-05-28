@@ -1,5 +1,3 @@
-# trying to extract text from website
-
 from newspaper import Article
 from bs4 import BeautifulSoup
 import re
@@ -53,22 +51,24 @@ wordslist = text.split()
 word = ''
 wordslist = [re.sub(r'\W+', '', word) for word in wordslist]
 
-# count empty elements in the list
-empty_element = 0
-for word in wordslist:
-    if word is '':
-        empty_element = empty_element + 1
+filtered = filter(lambda x: not re.match(r'^\s*$', x), text)
+#
+# # count empty elements in the list
+# empty_element = 0
+# for word in wordslist:
+#     if word is '':
+#         empty_element = empty_element + 1
+#
+# # to remove empty elements from the list
+# init_length = len(wordslist)  # initial length of the list
+# for i in range(len(wordslist)):
+#     if i == init_length - empty_element - 1:
+#         break
+#     if wordslist[i] is '':
+#         del wordslist[i]
+#         i = i - 1
+#
+# print(wordslist)
+# print('Word count: ' + str(len(wordslist)))
 
-# to remove empty elements from the list
-init_length = len(wordslist)  # initial length of the list
-for i in range(len(wordslist)):
-    if i == init_length - empty_element - 1:
-        break
-    if wordslist[i] is '':
-        del wordslist[i]
-        i = i - 1
-
-print(wordslist)
-print('Word count: ' + str(len(wordslist)))
-
-
+print(text)
