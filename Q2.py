@@ -2,9 +2,9 @@ import time
 from geopy.geocoders import Nominatim
 from number2 import ADistance
 
-
-def edge(a, b, cost):
-    return a, b, cost
+# this function is needed because list can't directly accept three values
+# def edge(a, b, cost):
+#     return a, b, cost
 
 
 # print(time.strftime('%Y/%m/%d %I:%M:%S  %A\n'))
@@ -21,13 +21,12 @@ for current in range(len(locations)):
             print(locations[current], '<->', locations[other])
             distance = d.distance(locations[current], locations[other])
             print('Distance: ' + str(distance) + 'km')
-            edges.append(edge(locations[current], locations[other], distance))
+            # edges.append(edge(locations[current], locations[other], distance))
     print('\n')
 
-f = open('edges.txt', 'w')
-f.write(str(edges))
-f.close()
-# print(edges)
+# f = open('edges.txt', 'w')
+# f.write(str(edges))
+# f.close()
 end = time.time()
 total_time = end - start
 print('\nTotal running time in seconds: ' + str(total_time))
