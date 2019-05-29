@@ -1,5 +1,5 @@
 from collections import deque, namedtuple
-
+from number2 import ADistance
 
 # we'll use infinity as a default distance to nodes.
 inf = float('inf')
@@ -97,15 +97,33 @@ class Graph:
 # print(graph.dijkstra("b", "f"))
 
 graph = Graph([
-    ("Kuala Lumpur", "Dhaka", 258), ("Kuala Lumpur", "Jakarta", 118), ("Jakarta", "Bandar Seri Begawan", 152),
-    ("Dhaka", "Bandar Seri Begawan", 336), ("Dhaka", "Shanghai", 317), ("Dhaka", "Tokyo", 490),
-    ("Bandar Seri Begawan", "Manila", 126), ("Manila", "Shanghai", 184), ("Manila", "Tokyo", 299),
-    ("Shanghai", "Tokyo", 177)])
+    ("Kuala Lumpur", "Dhaka", 2584.787), ("Kuala Lumpur", "Jakarta", 1178.665),
+    ("Kuala Lumpur", "Bandar Seri Begawan", 1483.521), ("Jakarta", "Bandar Seri Begawan", 1519.996),
+    ("Dhaka", "Bandar Seri Begawan", 3361.34), ("Dhaka", "Shanghai", 3171.866), ("Dhaka", "Tokyo", 4903.439),
+    ("Bandar Seri Begawan", "Manila", 1260.663), ("Manila", "Shanghai", 1842.992), ("Manila", "Tokyo", 2995.407),
+    ("Shanghai", "Tokyo", 1766.048)])
 
-c=list(graph.dijkstra("Kuala Lumpur", "Tokyo"))
 
-for i in c:
-    if i is c[-1]:
-        print(i)
-    else:
-        print(i,"--> ",end="")
+# driver program
+# mapp=list(graph.dijkstra("Kuala Lumpur", "Tokyo"))
+#
+# for i in mapp:
+#     if i is mapp[-1]:
+#         print(i)
+#     else:
+#         print(i,"--> ",end="")
+#
+# # declare center of the map
+# gmap = gmplot.GoogleMapPlotter(3.1516636, 101.6943028, 6)
+# # Scatter map
+# gmap.scatter(lats, lons, '#FF0000', size=50000, marker=False)
+#
+# for i in range(len(mapp)-1):
+#    gmap.plot([d.get_lat(mapp[i]), d.get_lat(mapp[i+1])], [d.get_lon(mapp[i]), d.get_lon(mapp[i+1])],
+#              'cornflowerblue', edge_width=2.0)
+#
+# gmap.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
+# gmap.draw("maps/graph_after.html")
+#
+# url = r"maps\graph_after.html"
+# webbrowser.open(url, new=2)
