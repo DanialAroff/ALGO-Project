@@ -62,23 +62,23 @@ def wordcount(text):
     return positive, negative, neutral
 
 
-malaysia_pos, malaysia_neg, malaysia_n = wordcount(malaysia_text)
-# dhaka_pos, dhaka_neg, dhaka_n = wordcount(dhaka_text)
-# jakarta_pos, jakarta_neg, jakarta_n = wordcount(jakarta_text)
-# bandar_seri_begawan_pos, bandar_seri_begawan_neg, bandar_seri_begawan_n = wordcount(bandar_seri_begawan_text)
-# manila_pos, manila_neg, manila_n = manila_text
-# shanghai_pos, shanghai_neg, shanghai_n = wordcount(shanghai_text)
-# tokyo_pos, tokyo_neg, tokyo_n = wordcount(tokyo_text)
+malaysia_pos, malaysia_neg, malaysia_neutral = wordcount(malaysia_text)
+# dhaka_pos, dhaka_neg, dhaka_neutral = wordcount(dhaka_text)
+# jakarta_pos, jakarta_neg, jakarta_neutral = wordcount(jakarta_text)
+# bandar_seri_begawan_pos, bandar_seri_begawan_neg, bandar_seri_begawan_neutral = wordcount(bandar_seri_begawan_text)
+# manila_pos, manila_neg, manila_eutralneutral = manila_text
+# shanghai_pos, shanghai_neg, shanghai_neutral = wordcount(shanghai_text)
+# tokyo_pos, tokyo_neg, tokyo_neutral = wordcount(tokyo_text)
 
 print("Malaysia word count")
 print("Positive word: " + str(malaysia_pos) + " word(s)")
 print("Negative word: " + str(malaysia_neg) + " word(s)")
-print("Neutral word: " + str(malaysia_n) + " word(s)")
+print("Neutral word: " + str(malaysia_neutral) + " word(s)")
 
 # Graph
 sent_value = ['Positive Word', 'Negative Word', 'Neutral Word']
 
-data = {'x': sent_value, 'y': [malaysia_pos, malaysia_neg, malaysia_n
+data = {'x': sent_value, 'y': [malaysia_pos, malaysia_neg, malaysia_neutral
                                ], 'type': 'bar'}
 # data = {'x': sent_value, 'y': [positive_frequency, negative_frequency, neutral_frequency], 'type': 'bar'}
 
@@ -103,6 +103,3 @@ py.plot([data], layout=layout)
 #     print('The country has neutral political situation')
 #
 #
-# print('Article form Tokyo')
-# get_stringMatching(tokyo_text)
-# print()
