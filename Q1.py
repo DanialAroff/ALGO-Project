@@ -49,7 +49,7 @@ gmap2.plot([31.2252985, 14.5906216], [121.4890497, 120.9799696], 'cornflowerblue
 gmap2.plot([23.7593572, 4.8895453], [90.3788136, 114.9417574], 'cornflowerblue', edge_width=2.0)
 
 gmap2.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
-gmap2.draw("maps/scatter map.html")
+gmap2.draw("maps/graph.html")
 
-url = r"maps\scatter map.html"
+url = r"maps\graph.html"
 webbrowser.open(url, new=2)

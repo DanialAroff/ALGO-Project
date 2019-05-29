@@ -1,15 +1,15 @@
 from number2 import ADistance
-
+from Graph import Graph
 
 d = ADistance()
 locations = ['Jakarta', 'Dhaka', 'Manila', 'Bandar Seri Begawan', 'Shanghai', 'Kuala Lumpur', 'Tokyo']
 
-for current in range(len(locations)):
-    for other in range(len(locations)):
-        if current is not other:
-            print(locations[current], '<->', locations[other])
-            print('Distance: ' + str(d.distance(locations[current], locations[other])) + 'km')
-    print('\n')
+# for current in range(len(locations)):
+#     for other in range(len(locations)):
+#         if current is not other:
+#             print(locations[current], '<->', locations[other])
+#             print('Distance: ' + str(d.distance(locations[current], locations[other])) + 'km')
+#     print('\n')
 
 graph = Graph([
     ("a", "b", 7),  ("a", "c", 9),  ("a", "f", 14), ("b", "c", 10),

@@ -89,9 +89,23 @@ class Graph:
         return path
 
 
-graph = Graph([
-    ("a", "b", 7), ("a", "c", 9), ("a", "f", 14), ("b", "c", 10),
-    ("b", "d", 15), ("c", "d", 11), ("c", "f", 2), ("d", "e", 6),
-    ("e", "f", 9)])
+# graph = Graph([
+#     ("a", "b", 7), ("a", "c", 9), ("a", "f", 14), ("b", "c", 10),
+#     ("b", "d", 15), ("c", "d", 11), ("c", "f", 2), ("d", "e", 6),
+#     ("e", "f", 9)])
+#
+# print(graph.dijkstra("b", "f"))
 
-print(graph.dijkstra("a", "e"))
+graph = Graph([
+    ("Kuala Lumpur", "Dhaka", 258), ("Kuala Lumpur", "Jakarta", 118), ("Jakarta", "Bandar Seri Begawan", 152),
+    ("Dhaka", "Bandar Seri Begawan", 336), ("Dhaka", "Shanghai", 317), ("Dhaka", "Tokyo", 490),
+    ("Bandar Seri Begawan", "Manila", 126), ("Manila", "Shanghai", 184), ("Manila", "Tokyo", 299),
+    ("Shanghai", "Tokyo", 177)])
+
+c=list(graph.dijkstra("Kuala Lumpur", "Tokyo"))
+
+for i in c:
+    if i is c[-1]:
+        print(i)
+    else:
+        print(i,"--> ",end="")

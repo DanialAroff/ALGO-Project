@@ -21,12 +21,12 @@ for current in range(len(locations)):
             print(locations[current], '<->', locations[other])
             distance = d.distance(locations[current], locations[other])
             print('Distance: ' + str(distance) + 'km')
-            # edges.append(edge(locations[current], locations[other], distance))
+            edges.append(edge(locations[current], locations[other], distance))
     print('\n')
 
-# f = open('edges.txt', 'w')
-# f.write(str(edges))
-# f.close()
+f = open('edges.txt', 'w')
+f.write(str(edges))
+f.close()
 # print(edges)
 end = time.time()
 total_time = end - start
