@@ -4,32 +4,26 @@ from Graph import Graph
 from geopy.geocoders import Nominatim
 import plotly.plotly as py
 import plotly.graph_objs as go
+import pandas as pd
 import RabinKarp
 import webbrowser
 import time
-import os
 
 start = time.time()
 
 d = ADistance()
-locations = ['Jakarta', 'Dhaka', 'Manila', 'Bandar Seri Begawan', 'Shanghai', 'Kuala Lumpur', 'Tokyo']
+locations = ['Kuala Lumpur', 'Dhaka', 'Jakarta', 'Bandar Seri Begawan', 'Manila', 'Shanghai', 'Tokyo']
 
-for i in range(len(locations)):
-    city = locations[i]
-    lat, lon = d.get_coord(city)
 
-    # place Map
-    # First 2 arguments are the geographical coordinates and the zoom resolution
-    gmap3 = gmplot.GoogleMapPlotter(lat, lon, 15)
-
-    gmap3.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
-    # Location of where you want to save the map
-    gmap3.draw("maps/" + city + ".html")
-
-# get latitude and longitude points of different cities
 coord = []
 for j in range(len(locations)):
-    coord.append(d.get_coord(locations[j]))
+    coord.append(d.get_coord_in_list(locations[j]))
+
+print(coord)
+df = pd.DataFrame(coord, columns=['xcord', 'ycord'], index=locations)
+print(df)
+
+# get latitude and longitude points of different cities
 lats, lons = zip(*coord)
 
 # declare center of the map
@@ -82,22 +76,30 @@ graph = Graph([
     ("Bandar Seri Begawan", "Manila", 1260.663), ("Manila", "Shanghai", 1842.992), ("Manila", "Tokyo", 2995.407),
     ("Shanghai", "Tokyo", 1766.048)])
 
+# starting_point = input("From: ")
+# end_point = input("To: ")
+# shortest_route = list(graph.dijkstra(starting_point, end_point))
+# print("Shortest route from", starting_point, "to", end_point)
 
 shortest_route = list(graph.dijkstra("Kuala Lumpur", "Tokyo"))
 
-print("Shortest route from Kuala Lumpur to Tokyo")
+print("Shortest route from Kuala Lumpur to Tokyo:")
 for i in shortest_route:
     if i is shortest_route[-1]:
         print(i, '\n')
     else:
         print(i, "--> ", end="")
 
-# declare center of the map
+
+##############################
+# Plot map for shortest path #
+##############################
 gmap3 = gmplot.GoogleMapPlotter(3.1516636, 101.6943028, 6)
 
 for i in range(len(shortest_route) - 1):
-    gmap3.plot([d.get_lat(shortest_route[i]), d.get_lat(shortest_route[i + 1])], [d.get_lon(shortest_route[i]), d.get_lon(shortest_route[i + 1])],
-              'cornflowerblue', edge_width=2.0)
+    gmap3.plot([d.get_lat(shortest_route[i]), d.get_lat(shortest_route[i + 1])], [d.get_lon(shortest_route[i]),
+                                                                                  d.get_lon(shortest_route[i + 1])],
+               'cornflowerblue', edge_width=2.0)
 
 gmap3.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
 gmap3.draw("maps/graph_after.html")
@@ -105,6 +107,7 @@ gmap3.draw("maps/graph_after.html")
 url = r"maps\graph_after.html"
 webbrowser.open(url, new=2)
 
+# initialize stop words
 stopwords = ['a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and',
              'any', 'are', "aren't", 'as', 'at', 'be', 'because', 'been', 'before', 'being',
              'below', 'between', 'both', 'but', 'by', "can't", 'cannot', 'could', "couldn't", 'did',
@@ -158,19 +161,13 @@ tokyo_text = tokyoIO.read().lower()
 tokyo_text = tokyo_text.replace("\n", " ")
 tokyoIO.close()
 
-# Read file for positive and negative words
-pfile = open('wordlist/positivewords.txt', 'r', encoding='utf-8-sig')
-positive_text = pfile.read().lower().split('\n')
-nfile = open('wordlist/negativewords.txt', 'r', encoding='utf-8-sig')
-negative_text = nfile.read().lower().split('\n')
-
 
 # get frequency of words in a text
 def frequency(text, city):
     list_of_words = text.split()
     freq = {}
-    for x in list_of_words:
-        freq[x] = freq.get(x, 0) + 1
+    for word in list_of_words:
+        freq[word] = freq.get(word, 0) + 1
     keys = freq.keys()
 
     print("Frequencies of word for " + city + "'s article:\n\n" + str(freq) + "\n")
@@ -192,6 +189,8 @@ def word_count(text):
     for word in stopwords:
         if RabinKarp.rabin_karp_matcher(word, text):
             stop_count = stop_count + 1
+            # delete stop words
+            text = text.lower().replace(word, "", 1)
     return stop_count, len(list_of_words)
 
 
@@ -209,10 +208,10 @@ py.sign_in(username='DanialHarith', api_key='NyqKPpTtwYfr4nyZwcYP')
 x = ["Kuala Lumpur", "Dhaka", "Jakarta", "Bandar Seri Begawan", "Manila", "Shanghai", "Tokyo"]
 stop_counts = [kl_stop_count, dhaka_stop_count, jakarta_stop_count, bsb_stop_count,
                manila_stop_count, shanghai_stop_count, tokyo_stop_count]
-stop_counts = [str(i) for i in stop_counts]
+# stop_counts = [str(i) for i in stop_counts]
 total_words = [kl_total_words, dhaka_total_words, jakarta_total_words, bsb_total_words,
                manila_total_words, shanghai_total_words, tokyo_total_words]
-total_words = [str(i) for i in total_words]
+# total_words = [str(i) for i in total_words]
 
 data = [
     go.Histogram(
@@ -238,5 +237,25 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 py.plot(fig, filename='Stop Words Count')
 
+# Get the total distribution taken of random routes taken for end user
+a = d.distance("Kuala Lumpur", "Manila")
+
+b = d.distance("Kuala Lumpur", "Jakarta")
+
+c = d.distance("Kuala Lumpur", "Dhaka")
+
+TotalDist = a + b + c
+
+distKL_to_Manila = a / TotalDist
+
+distKL_to_Jakarta = b / TotalDist
+
+distKL_to_Dhaka = c / TotalDist
+
+print("Probability Distribution for KL to Manila = ", distKL_to_Manila,
+      "\nProbability Distribution for KL to Jakarta = ", distKL_to_Jakarta,
+      "\nProbability Distribution for KL to Dhaka = ", distKL_to_Dhaka,)
+
+
 end = time.time() - start
-print("Total running time:", end, "s")
+print("\nTotal running time:", end, "s")
