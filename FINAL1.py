@@ -19,7 +19,6 @@ coord = []
 for j in range(len(locations)):
     coord.append(d.get_coord_in_list(locations[j]))
 
-print(coord)
 df = pd.DataFrame(coord, columns=['xcord', 'ycord'], index=locations)
 print(df)
 
@@ -57,8 +56,8 @@ webbrowser.open(url, new=2)
 
 geolocator = Nominatim(user_agent='WIA2005_Assignment')
 d = ADistance()
+
 locations = ['Jakarta', 'Dhaka', 'Manila', 'Bandar Seri Begawan', 'Shanghai', 'Kuala Lumpur', 'Tokyo']
-edges = []
 
 for current in range(len(locations)):
     for other in range(len(locations)):
@@ -66,7 +65,6 @@ for current in range(len(locations)):
             print(locations[current], '<->', locations[other])
             distance = d.distance(locations[current], locations[other])
             print('Distance: ' + str(distance) + 'km')
-            # edges.append(edge(locations[current], locations[other], distance))
     print('\n')
 
 graph = Graph([
@@ -81,7 +79,7 @@ graph = Graph([
 # shortest_route = list(graph.dijkstra(starting_point, end_point))
 # print("Shortest route from", starting_point, "to", end_point)
 
-shortest_route = list(graph.dijkstra("Kuala Lumpur", "Tokyo"))
+shortest_route = list(graph.dijkstra("Dhaka", "Manila"))
 
 print("Shortest route from Kuala Lumpur to Tokyo:")
 for i in shortest_route:
@@ -182,7 +180,7 @@ frequency(manila_text, 'Manila')
 frequency(shanghai_text, 'Shanghai')
 frequency(tokyo_text, 'Tokyo')
 
-
+print(kl_text)
 def word_count(text):
     stop_count = 0
     list_of_words = text.split()
@@ -192,7 +190,7 @@ def word_count(text):
             # delete stop words
             text = text.lower().replace(word, "", 1)
     return stop_count, len(list_of_words)
-
+print("\n" + kl_text)
 
 kl_stop_count, kl_total_words = word_count(kl_text)
 dhaka_stop_count, dhaka_total_words = word_count(dhaka_text)
@@ -252,7 +250,7 @@ distKL_to_Jakarta = b / TotalDist
 
 distKL_to_Dhaka = c / TotalDist
 
-print("Probability Distribution for KL to Manila = ", distKL_to_Manila,
+print("\nProbability Distribution for KL to Manila = ", distKL_to_Manila,
       "\nProbability Distribution for KL to Jakarta = ", distKL_to_Jakarta,
       "\nProbability Distribution for KL to Dhaka = ", distKL_to_Dhaka,)
 

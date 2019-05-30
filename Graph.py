@@ -1,5 +1,4 @@
 from collections import deque, namedtuple
-from number2 import ADistance
 
 # we'll use infinity as a default distance to nodes.
 inf = float('inf')
@@ -88,13 +87,6 @@ class Graph:
             path.appendleft(current_vertex)
         return path
 
-
-# graph = Graph([
-#     ("a", "b", 7), ("a", "c", 9), ("a", "f", 14), ("b", "c", 10),
-#     ("b", "d", 15), ("c", "d", 11), ("c", "f", 2), ("d", "e", 6),
-#     ("e", "f", 9)])
-#
-# print(graph.dijkstra("b", "f"))
 
 graph = Graph([
     ("Kuala Lumpur", "Dhaka", 2584.787), ("Kuala Lumpur", "Jakarta", 1178.665),
