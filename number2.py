@@ -20,6 +20,10 @@ class ADistance:
         location = self.geolocator.geocode(location, timeout=30, language='en')
         return location.latitude, location.longitude
 
+    def get_coord_in_list(self, location):
+        location = self.geolocator.geocode(location, timeout=30, language='en')
+        return [location.latitude, location.longitude]
+
     def get_lat(self, location):
         location = self.geolocator.geocode(location, timeout=30, language='en')
         return location.latitude
