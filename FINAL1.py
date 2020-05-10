@@ -14,13 +14,13 @@ start = time.time()
 d = ADistance()
 locations = ['Kuala Lumpur', 'Dhaka', 'Jakarta', 'Bandar Seri Begawan', 'Manila', 'Shanghai', 'Tokyo']
 
-
 coord = []
 for j in range(len(locations)):
     coord.append(d.get_coord_in_list(locations[j]))
 
-df = pd.DataFrame(coord, columns=['xcord', 'ycord'], index=locations)
+df = pd.DataFrame(coord, columns=['x-cord', 'y-cord'], index=locations)
 print(df)
+print()
 
 # get latitude and longitude points of different cities
 lats, lons = zip(*coord)
@@ -55,9 +55,6 @@ url = r"maps\graph_before.html"
 webbrowser.open(url, new=2)
 
 geolocator = Nominatim(user_agent='WIA2005_Assignment')
-d = ADistance()
-
-locations = ['Jakarta', 'Dhaka', 'Manila', 'Bandar Seri Begawan', 'Shanghai', 'Kuala Lumpur', 'Tokyo']
 
 for current in range(len(locations)):
     for other in range(len(locations)):
@@ -66,6 +63,7 @@ for current in range(len(locations)):
             distance = d.distance(locations[current], locations[other])
             print('Distance: ' + str(distance) + 'km')
     print('\n')
+
 
 graph = Graph([
     ("Kuala Lumpur", "Dhaka", 2584.787), ("Kuala Lumpur", "Jakarta", 1178.665),
@@ -105,7 +103,7 @@ gmap3.draw("maps/graph_after.html")
 url = r"maps\graph_after.html"
 webbrowser.open(url, new=2)
 
-# initialize stop words
+# initializing stop words
 stopwords = ['a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and',
              'any', 'are', "aren't", 'as', 'at', 'be', 'because', 'been', 'before', 'being',
              'below', 'between', 'both', 'but', 'by', "can't", 'cannot', 'could', "couldn't", 'did',
@@ -180,7 +178,7 @@ frequency(manila_text, 'Manila')
 frequency(shanghai_text, 'Shanghai')
 frequency(tokyo_text, 'Tokyo')
 
-print(kl_text)
+
 def word_count(text):
     stop_count = 0
     list_of_words = text.split()
@@ -190,7 +188,7 @@ def word_count(text):
             # delete stop words
             text = text.lower().replace(word, "", 1)
     return stop_count, len(list_of_words)
-print("\n" + kl_text)
+
 
 kl_stop_count, kl_total_words = word_count(kl_text)
 dhaka_stop_count, dhaka_total_words = word_count(dhaka_text)
@@ -206,10 +204,8 @@ py.sign_in(username='DanialHarith', api_key='NyqKPpTtwYfr4nyZwcYP')
 x = ["Kuala Lumpur", "Dhaka", "Jakarta", "Bandar Seri Begawan", "Manila", "Shanghai", "Tokyo"]
 stop_counts = [kl_stop_count, dhaka_stop_count, jakarta_stop_count, bsb_stop_count,
                manila_stop_count, shanghai_stop_count, tokyo_stop_count]
-# stop_counts = [str(i) for i in stop_counts]
 total_words = [kl_total_words, dhaka_total_words, jakarta_total_words, bsb_total_words,
                manila_total_words, shanghai_total_words, tokyo_total_words]
-# total_words = [str(i) for i in total_words]
 
 data = [
     go.Histogram(
@@ -235,7 +231,9 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 py.plot(fig, filename='Stop Words Count')
 
-# Get the total distribution taken of random routes taken for end user
+########################################################################
+# Get the total distribution taken of random routes taken for end user #
+########################################################################
 a = d.distance("Kuala Lumpur", "Manila")
 
 b = d.distance("Kuala Lumpur", "Jakarta")

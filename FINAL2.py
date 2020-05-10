@@ -130,13 +130,14 @@ data = [
         y=negative_y,
         x=x,
         name="Negative words"
-    ),
-    go.Histogram(
-        histfunc="sum",
-        y=neutral_y,
-        x=x,
-        name="Neutral words"
     )
+    # ),
+    # go.Histogram(
+    #     histfunc="sum",
+    #     y=neutral_y,
+    #     x=x,
+    #     name="Neutral words"
+    # )
 ]
 layout = go.Layout(
     title=go.layout.Title(
@@ -147,20 +148,6 @@ layout = go.Layout(
 )
 fig = go.Figure(data=data, layout=layout)
 py.plot(fig, filename='Positive & Negative Word Count')
-# sent_value = ['Positive Word', 'Negative Word', 'Neutral Word']
-#
-# data = {'x': sent_value, 'y': [malaysia_pos, malaysia_neg, malaysia_neutral
-#                                ], 'type': 'bar'}
-# # data = {'x': sent_value, 'y': [positive_frequency, negative_frequency, neutral_frequency], 'type': 'bar'}
-#
-# layout = {'title': 'The Frequency of Positive and Negative Word',
-#           'autosize': False,
-#           'width': 800,
-#           'height': 700,
-#           'yaxis': {'title': 'Frequency of Word'},
-#           'xaxis': {'title': 'Type of Word'}}
-#
-# py.plot([data], layout=layout)
 
 
 ############################
